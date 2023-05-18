@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const { STRING } = Sequelize;
-const db = new Sequelize("postgres://ec2-user:localhost:5432/bookmarker");
+const db = new Sequelize("postgres://postgres:Neilfinn93!@localhost/BookMarker", {logging: false});
 
 const BookMark = db.define('bookmark', {
     name: {
@@ -18,15 +18,6 @@ const BookMark = db.define('bookmark', {
             notEmpty: true,
         },
     },
-   
-    category: {
-        type: STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        },
-    }, 
-    
 });
 
 
@@ -41,7 +32,7 @@ const Category = db.define('category', {
 });
 
 
-Category.hasmany(BookMark);
+Category.hasMany(BookMark);
 BookMark.belongsTo(Category);
 
 
